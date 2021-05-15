@@ -33,8 +33,10 @@ target_include_directories(
 target_sources(
     ${PROJECT_NAME}
     PUBLIC  # All public source and header files listed here
+        include/crc8.h
         include/crc16.h
     PRIVATE # All private source and header files listed here
+        src/crc8.c
         src/crc16.c
 )
 
