@@ -1,3 +1,3 @@
 #include <stdint.h>
 
-void CRC16_Init();
+void CRC8_Init();
