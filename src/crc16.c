@@ -1,4 +1,7 @@
+#include "crc_common.h"
 #include "crc16.h"
+
+#if USE_LOOKUP
 
 uint16_t CRC16_Lookup[] = {
 		0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7, 0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
@@ -24,8 +27,30 @@ uint16_t CRC16_Calculate(uint8_t* data, uint32_t length)
 	uint16_t crc = 0;
 	for (uint32_t i = 0; i < length; i++)
 	{
-		uint8_t index = (crc >> 8) ^ data[i];
-		crc			  = (crc << 8) ^ CRC16_Lookup[index];
+		uint8_t index = (crc >> CRC16_2_MSB) ^ data[i];
+		crc			  = (crc << CRC16_2_MSB) ^ CRC16_Lookup[index];
 	}
 	return crc;
 }
+
+#else
+
+uint16_t CRC16_Calculate(uint8_t* data, uint32_t length)
+{
+	const uint16_t polynomial = CRC16_POLYNOMIAL;
+	uint16_t	   crc		  = 0;
+	for (uint32_t i = 0; i < length; i++)
+	{
+		crc ^= data[i] << CRC16_2_MSB;
+		for (uint8_t j = 0; j < BITS_IN_BYTE; j++)
+		{
+			if (crc & CRC16_MSB)
+				crc = (crc << 1) ^ polynomial;
+			else
+				crc <<= 1;
+		}
+	}
+	return crc;
+}
+
+#endif

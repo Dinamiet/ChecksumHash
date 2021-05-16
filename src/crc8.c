@@ -1,4 +1,7 @@
+#include "crc_common.h"
 #include "crc8.h"
+
+#if USE_LOOKUP
 
 uint8_t CRC8_Lookup[] = {
 		0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D, 0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B,
@@ -25,3 +28,25 @@ uint8_t CRC8_Calculate(uint8_t* data, uint32_t length)
 	}
 	return crc;
 }
+
+#else
+
+uint8_t CRC8_Calculate(uint8_t* data, uint32_t length)
+{
+	const uint8_t polynomial = CRC8_POLYNOMIAL;
+	uint8_t crc		   = 0;
+	for (uint32_t i = 0; i < length; i++)
+	{
+		crc ^= data[i];
+		for (uint8_t j = 0; j < BITS_IN_BYTE; j++)
+		{
+			if (crc & CRC8_MSB)
+				crc = (crc << 1) ^ polynomial;
+			else
+				crc <<= 1;
+		}
+	}
+	return crc;
+}
+
+#endif

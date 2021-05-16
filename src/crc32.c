@@ -1,4 +1,7 @@
+#include "crc_common.h"
 #include "crc32.h"
+
+#if USE_LOOKUP
 
 uint32_t CRC32_Lookup[] = {
 		0x00000000, 0x04C11DB7, 0x09823B6E, 0x0D4326D9, 0x130476DC, 0x17C56B6B, 0x1A864DB2, 0x1E475005, 0x2608EDB8, 0x22C9F00F, 0x2F8AD6D6,
@@ -32,8 +35,32 @@ uint32_t CRC32_Calculate(uint8_t* data, uint32_t length)
 	uint32_t crc = 0;
 	for (uint32_t i = 0; i < length; i++)
 	{
-		uint8_t index = (crc ^ (data[i] << 24)) >> 24;
-		crc			  = (crc << 8) ^ CRC32_Lookup[index];
+		uint8_t index = (crc ^ (data[i] << CRC24_2_MSB)) >> CRC24_2_MSB;
+		crc			  = (crc << BITS_IN_BYTE) ^ CRC32_Lookup[index];
 	}
 	return ~crc;
 }
+
+#else
+
+uint32_t CRC32_Calculate(uint8_t* data, uint32_t length)
+{
+	const uint32_t polynomial = CRC32_POLYNOMIAL;
+	uint32_t	   crc		  = 0;
+
+	for (uint32_t i = 0; i < length; i++)
+	{
+		crc ^= data[i] << CRC24_2_MSB;
+		for (uint8_t j = 0; j < BITS_IN_BYTE; j++)
+		{
+			if (crc & CRC32_MSB)
+				crc = (crc << 1) ^ polynomial;
+			else
+				crc <<= 1;
+		}
+	}
+
+	return ~crc;
+}
+
+#endif
