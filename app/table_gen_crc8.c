@@ -25,7 +25,7 @@ void CalculateTable()
 			}
 		}
 		lookup[divident]= currByte;
-		printf("0x%x, ", currByte);
+		printf("0x%.2X, ", currByte);
 	}
 }
 

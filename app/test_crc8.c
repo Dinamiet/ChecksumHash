@@ -30,5 +30,6 @@ int main()
 		return 3;
 	}
 
+	printf("SUCC\n");
 	return 0;
 }
