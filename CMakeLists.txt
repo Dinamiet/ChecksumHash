@@ -4,6 +4,8 @@ project(
     ChecksumHash
 )
 
+option(CRC_USE_LOOKUP "Enable the use of lookup tables" ON)
+
 if (NOT TARGET ${PROJECT_NAME})
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
@@ -42,5 +44,9 @@ target_sources(
         src/crc16.c
         src/crc32.c
 )
+
+if (CRC_USE_LOOKUP)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE USE_LOOKUP)
+endif()
 
 endif()
