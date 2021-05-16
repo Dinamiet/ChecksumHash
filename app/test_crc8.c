@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 int main()
 {
@@ -19,6 +20,14 @@ int main()
 	{
 		printf("0x%X expected 0x8A\n", crc);
 		return 2;
+	}
+
+	char* checkString= "123456789";
+	crc= CRC8_Calculate((uint8_t*)checkString, strlen(checkString));
+	if (crc ^ 0xF4)
+	{
+		printf("String check failed\n");
+		return 3;
 	}
 
 	return 0;
