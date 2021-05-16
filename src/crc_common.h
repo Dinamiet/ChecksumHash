@@ -10,7 +10,7 @@
 #define CRC32_MSB (1 << 31)
 
 #define CRC16_2_MSB 8
-#define CRC24_2_MSB 24
+#define CRC32_2_MSB 24
 
 #define BITS_IN_BYTE 8
 
