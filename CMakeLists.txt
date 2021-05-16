@@ -35,9 +35,11 @@ target_sources(
     PUBLIC  # All public source and header files listed here
         include/crc8.h
         include/crc16.h
+        include/crc32.h
     PRIVATE # All private source and header files listed here
         src/crc8.c
         src/crc16.c
+        src/crc32.c
 )
 
 endif()
