@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-void CRC16_Init();
+uint16_t CRC16_Calculate(uint8_t* data, uint32_t length);
 
 #endif
