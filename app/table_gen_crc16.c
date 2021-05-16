@@ -4,7 +4,7 @@
 #define START_POLINOMIAL 0x1021
 #define LOOKUP_SIZE		 256
 
-uint8_t lookup[LOOKUP_SIZE];
+uint16_t lookup[LOOKUP_SIZE];
 
 void CalculateTable()
 {
