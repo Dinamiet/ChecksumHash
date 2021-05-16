@@ -1,20 +1,21 @@
+#include "crc_common.h"
+
 #include <stdint.h>
 #include <stdio.h>
 
-#define START_POLINOMIAL 0x07
-#define LOOKUP_SIZE		 256
+#define LOOKUP_SIZE 256
 
 uint8_t lookup[LOOKUP_SIZE];
 
 void CalculateTable()
 {
-	uint8_t generator = START_POLINOMIAL;
+	uint8_t generator = CRC8_POLYNOMIAL;
 	for (uint16_t divident = 0; divident < LOOKUP_SIZE; divident++)
 	{
 		uint8_t currByte = divident;
 		for (uint16_t bit = 0; bit < 8; bit++)
 		{
-			if ((currByte & 0x80) != 0)
+			if ((currByte & CRC8_MSB) != 0)
 			{
 				currByte <<= 1;
 				currByte ^= generator;

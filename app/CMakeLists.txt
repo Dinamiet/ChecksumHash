@@ -6,6 +6,8 @@ add_executable(${EXECUTABLE_TARGET})
 
 target_compile_options(${EXECUTABLE_TARGET} PRIVATE -Wall -Wextra -Wpedantic -Werror)
 
+target_include_directories(${EXECUTABLE_TARGET} PRIVATE ../src/)
+
 target_sources(
     ${EXECUTABLE_TARGET}
     PRIVATE # All private source and header files listed here
@@ -31,6 +33,8 @@ add_executable(${EXECUTABLE_TARGET})
 
 target_compile_options(${EXECUTABLE_TARGET} PRIVATE -Wall -Wextra -Wpedantic -Werror)
 
+target_include_directories(${EXECUTABLE_TARGET} PRIVATE ../src/)
+
 target_sources(
     ${EXECUTABLE_TARGET}
     PRIVATE # All private source and header files listed here
@@ -55,6 +59,8 @@ set(EXECUTABLE_TARGET "${PROJECT_NAME}_crc32_table")
 add_executable(${EXECUTABLE_TARGET})
 
 target_compile_options(${EXECUTABLE_TARGET} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+
+target_include_directories(${EXECUTABLE_TARGET} PRIVATE ../src/)
 
 target_sources(
     ${EXECUTABLE_TARGET}

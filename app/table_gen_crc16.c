@@ -1,20 +1,20 @@
+#include "crc_common.h"
+
 #include <stdint.h>
 #include <stdio.h>
-
-#define START_POLINOMIAL 0x1021
-#define LOOKUP_SIZE		 256
+#define LOOKUP_SIZE 256
 
 uint16_t lookup[LOOKUP_SIZE];
 
 void CalculateTable()
 {
-	uint16_t generator = START_POLINOMIAL;
+	uint16_t generator = CRC16_POLYNOMIAL;
 	for (uint16_t divident = 0; divident < LOOKUP_SIZE; divident++)
 	{
-		uint16_t currValue = divident << 8;
-		for (uint16_t bit = 0; bit < 8; bit++)
+		uint16_t currValue = divident << CRC16_2_MSB;
+		for (uint16_t bit = 0; bit < CRC16_2_MSB; bit++)
 		{
-			if ((currValue & 0x8000) != 0)
+			if ((currValue & CRC16_MSB) != 0)
 			{
 				currValue <<= 1;
 				currValue ^= generator;
