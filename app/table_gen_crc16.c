@@ -1,17 +1,17 @@
-#include <stdio.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #define START_POLINOMIAL 0x1021
-#define LOOKUP_SIZE 256
+#define LOOKUP_SIZE		 256
 
 uint8_t lookup[LOOKUP_SIZE];
 
 void CalculateTable()
 {
-	uint16_t generator= START_POLINOMIAL;
+	uint16_t generator = START_POLINOMIAL;
 	for (uint16_t divident = 0; divident < LOOKUP_SIZE; divident++)
 	{
-		uint16_t currValue= divident << 8;
+		uint16_t currValue = divident << 8;
 		for (uint16_t bit = 0; bit < 8; bit++)
 		{
 			if ((currValue & 0x8000) != 0)
@@ -24,7 +24,7 @@ void CalculateTable()
 				currValue <<= 1;
 			}
 		}
-		lookup[divident]= currValue;
+		lookup[divident] = currValue;
 		printf("0x%.4X, ", currValue);
 	}
 }
@@ -37,7 +37,7 @@ int main()
 
 	for (uint16_t i = 0; i < LOOKUP_SIZE; i++)
 	{
-		for (uint16_t j = i+1; j < LOOKUP_SIZE; j++)
+		for (uint16_t j = i + 1; j < LOOKUP_SIZE; j++)
 		{
 			if (lookup[i] == lookup[j])
 			{
@@ -45,7 +45,6 @@ int main()
 				return 1;
 			}
 		}
-
 	}
 	printf("No clashes detected\n");
 	return 0;

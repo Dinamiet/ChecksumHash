@@ -15,15 +15,15 @@ int main()
 	}
 
 	uint8_t data2[] = {0xcb, 0x25, 0x06, 0xb4, 0xda, 0xf2, 0x2e, 0x74, 0x57, 0xa2, 0x48, 0x53, 0x1b, 0x17, 0x25, 0xf3};
-	crc		 = CRC8_Calculate(data2, 16);
+	crc				= CRC8_Calculate(data2, 16);
 	if (crc ^ 0x8A)
 	{
 		printf("0x%X expected 0x8A\n", crc);
 		return 2;
 	}
 
-	char* checkString= "123456789";
-	crc= CRC8_Calculate((uint8_t*)checkString, strlen(checkString));
+	char* checkString = "123456789";
+	crc				  = CRC8_Calculate((uint8_t*)checkString, strlen(checkString));
 	if (crc ^ 0xF4)
 	{
 		printf("String check failed\n");
