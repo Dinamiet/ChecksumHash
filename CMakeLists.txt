@@ -37,6 +37,7 @@ target_sources(
         include/crc16.h
         include/crc32.h
     PRIVATE # All private source and header files listed here
+        src/crc_common.h
         src/crc8.c
         src/crc16.c
         src/crc32.c
