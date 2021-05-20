@@ -158,7 +158,7 @@ add_test(
 )
 
 ################################
-set(EXECUTABLE_TARGET "${PROJECT_NAME}_sdbm")
+set(EXECUTABLE_TARGET "${PROJECT_NAME}_hash")
 add_executable(${EXECUTABLE_TARGET})
 
 target_compile_options(${EXECUTABLE_TARGET} PRIVATE -Wall -Wextra -Wpedantic -Werror)
@@ -166,7 +166,7 @@ target_compile_options(${EXECUTABLE_TARGET} PRIVATE -Wall -Wextra -Wpedantic -We
 target_sources(
     ${EXECUTABLE_TARGET}
     PRIVATE # All private source and header files listed here
-        test_SDBM_hash.c
+        test_hash.c
 )
 
 target_link_libraries(

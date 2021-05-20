@@ -9,7 +9,15 @@ Nice resources:
 
 ## Hash function
 SDBM:
+Provides `good` distibution
 >	https://www.cse.yorku.ca/~oz/hash.html
+
+
+FNV:
+Provides `outstanding` distibution (`excellent` for FNV-1)
+>	https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
+
+FNV-1a provides better distibution than FNV-1
 
 # TODO:
 -	MD5 Hash
