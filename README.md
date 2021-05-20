@@ -22,3 +22,5 @@ FNV-1a provides better distibution than FNV-1
 # TODO:
 -	MD5 Hash
 -	SHA256 Hash
+
+>	https://medium.com/a-42-journey/implementing-the-sha256-and-md5-hash-functions-in-c-78c17e657794
