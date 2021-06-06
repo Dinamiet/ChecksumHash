@@ -22,7 +22,7 @@ uint16_t CRC16_Lookup[] = {
 		0xEF1F, 0xFF3E, 0xCF5D, 0xDF7C, 0xAF9B, 0xBFBA, 0x8FD9, 0x9FF8, 0x6E17, 0x7E36, 0x4E55, 0x5E74, 0x2E93, 0x3EB2, 0x0ED1, 0x1EF0,
 };
 
-uint16_t CRC16_Calculate(uint8_t* data, uint32_t length)
+uint16_t CRC16_Calculate(uint8_t* data, uint16_t length)
 {
 	uint16_t crc = 0;
 	for (uint32_t i = 0; i < length; i++)
@@ -35,7 +35,7 @@ uint16_t CRC16_Calculate(uint8_t* data, uint32_t length)
 
 #else
 
-uint16_t CRC16_Calculate(uint8_t* data, uint32_t length)
+uint16_t CRC16_Calculate(uint8_t* data, uint16_t length)
 {
 	const uint16_t polynomial = CRC16_POLYNOMIAL;
 	uint16_t	   crc		  = 0;
