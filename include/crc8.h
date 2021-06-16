@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-uint8_t CRC8_Calculate(uint8_t* data, uint16_t length);
+uint8_t CRC8_Calculate(uint8_t* data, uint32_t length);
 
 #endif

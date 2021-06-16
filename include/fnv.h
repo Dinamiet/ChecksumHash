@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-uint32_t FNV_Hash(uint8_t* data, uint16_t length);
+uint32_t FNV_Hash(uint8_t* data, uint32_t length);
 
 #endif
