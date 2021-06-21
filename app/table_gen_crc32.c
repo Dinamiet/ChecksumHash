@@ -12,7 +12,7 @@ void CalculateTable()
 	for (uint16_t divident = 0; divident < LOOKUP_SIZE; divident++)
 	{
 		uint32_t currValue = divident << CRC32_2_MSB;
-		for (uint16_t bit = 0; bit < 8; bit++)
+		for (uint8_t bit = 0; bit < BITS_IN_BYTE; bit++)
 		{
 			if ((currValue & CRC32_MSB) != 0)
 			{
