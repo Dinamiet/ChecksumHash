@@ -27,8 +27,8 @@ uint16_t CRC16_Calculate(uint8_t* data, uint32_t length)
 	uint16_t crc = 0;
 	for (uint32_t i = 0; i < length; i++)
 	{
-		uint8_t index = (crc >> CRC16_2_MSB) ^ data[i];
-		crc			  = (crc << CRC16_2_MSB) ^ CRC16_Lookup[index];
+		uint8_t index = (uint8_t)(crc >> CRC16_2_MSB) ^ data[i];
+		crc			  = (uint16_t)(crc << CRC16_2_MSB) ^ CRC16_Lookup[index];
 	}
 	return crc;
 }
