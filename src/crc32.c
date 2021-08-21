@@ -36,7 +36,7 @@ uint32_t CRC32_Calculate(void* _data, size_t size)
 	uint32_t crc = 0;
 	for (size_t i = 0; i < size; i++)
 	{
-		uint8_t index = (uint8_t)((crc ^ (data[i] << CRC32_2_MSB)) >> CRC32_2_MSB);
+		uint8_t index = (uint8_t)((crc ^ ((uint32_t)data[i] << CRC32_2_MSB)) >> CRC32_2_MSB);
 		crc			  = (crc << BITS_IN_BYTE) ^ CRC32_Lookup[index];
 	}
 	return ~crc;
