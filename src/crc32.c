@@ -30,10 +30,11 @@ const uint32_t CRC32_Lookup[] = {
 		0xB8757BDA, 0xB5365D03, 0xB1F740B4,
 };
 
-uint32_t CRC32_Calculate(uint8_t* data, uint32_t length)
+uint32_t CRC32_Calculate(void* _data, size_t size)
 {
+	uint8_t* data= _data;
 	uint32_t crc = 0;
-	for (uint32_t i = 0; i < length; i++)
+	for (size_t i = 0; i < size; i++)
 	{
 		uint8_t index = (uint8_t)((crc ^ (data[i] << CRC32_2_MSB)) >> CRC32_2_MSB);
 		crc			  = (crc << BITS_IN_BYTE) ^ CRC32_Lookup[index];
@@ -43,9 +44,9 @@ uint32_t CRC32_Calculate(uint8_t* data, uint32_t length)
 
 #else
 
-uint32_t CRC32_Calculate(uint8_t* data, uint32_t length)
+uint32_t CRC32_Calculate(void* _data, size_t size)
 {
-	const uint32_t polynomial = CRC32_POLYNOMIAL;
+	uint8_t* data= _data;
 	uint32_t	   crc		  = 0;
 
 	for (uint32_t i = 0; i < length; i++)
@@ -54,7 +55,7 @@ uint32_t CRC32_Calculate(uint8_t* data, uint32_t length)
 		for (uint8_t j = 0; j < BITS_IN_BYTE; j++)
 		{
 			if (crc & CRC32_MSB)
-				crc = (crc << 1) ^ polynomial;
+				crc = (crc << 1) ^ CRC32_POLYNOMIAL;
 			else
 				crc <<= 1;
 		}

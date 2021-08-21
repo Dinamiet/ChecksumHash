@@ -18,10 +18,11 @@ const uint8_t CRC8_Lookup[] = {
 		0xD0, 0xD7, 0xC2, 0xC5, 0xCC, 0xCB, 0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3,
 };
 
-uint8_t CRC8_Calculate(uint8_t* data, uint32_t length)
+uint8_t CRC8_Calculate(void* _data, size_t size)
 {
+	uint8_t* data= _data;
 	uint8_t crc = 0;
-	for (uint32_t i = 0; i < length; i++)
+	for (size_t i = 0; i < size; i++)
 	{
 		uint8_t index = crc ^ data[i];
 		crc			  = CRC8_Lookup[index];
@@ -31,17 +32,17 @@ uint8_t CRC8_Calculate(uint8_t* data, uint32_t length)
 
 #else
 
-uint8_t CRC8_Calculate(uint8_t* data, uint32_t length)
+uint8_t CRC8_Calculate(void* _data, size_t size)
 {
-	const uint8_t polynomial = CRC8_POLYNOMIAL;
+	uint8_t* data= _data;
 	uint8_t crc		   = 0;
-	for (uint32_t i = 0; i < length; i++)
+	for (size_t i = 0; i < size; i++)
 	{
 		crc ^= data[i];
 		for (uint8_t j = 0; j < BITS_IN_BYTE; j++)
 		{
 			if (crc & CRC8_MSB)
-				crc = (crc << 1) ^ polynomial;
+				crc = (crc << 1) ^ CRC8_POLYNOMIAL;
 			else
 				crc <<= 1;
 		}

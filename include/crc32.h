@@ -2,7 +2,8 @@
 #define __CRC32_H__
 
 #include <stdint.h>
+#include <stddef.h>
 
-uint32_t CRC32_Calculate(uint8_t* data, uint32_t length);
+uint32_t CRC32_Calculate(void* data, size_t size);
 
 #endif
