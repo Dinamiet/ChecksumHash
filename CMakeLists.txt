@@ -7,6 +7,8 @@ project(
     ChecksumHash
 )
 
+if (NOT TARGET ${PROJECT_NAME}) # Only configure if not already configured
+
 option(CRC_USE_LOOKUP "Enable the use of lookup tables" ON)
 
 add_library(
@@ -69,4 +71,6 @@ target_sources(
 
 if (CRC_USE_LOOKUP)
     target_compile_definitions(${PROJECT_NAME} PRIVATE USE_LOOKUP)
+endif()
+
 endif()
