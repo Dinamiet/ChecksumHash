@@ -1,5 +1,6 @@
-#include "crc_common.h"
 #include "crc32.h"
+
+#include "crc_common.h"
 
 #ifdef USE_LOOKUP
 
@@ -32,8 +33,8 @@ const uint32_t CRC32_Lookup[] = {
 
 uint32_t CRC32_Calculate(void* _data, size_t size)
 {
-	uint8_t* data= _data;
-	uint32_t crc = 0;
+	uint8_t* data = _data;
+	uint32_t crc  = 0;
 	for (size_t i = 0; i < size; i++)
 	{
 		uint8_t index = (uint8_t)((crc ^ ((uint32_t)data[i] << CRC32_2_MSB)) >> CRC32_2_MSB);
@@ -46,8 +47,8 @@ uint32_t CRC32_Calculate(void* _data, size_t size)
 
 uint32_t CRC32_Calculate(void* _data, size_t size)
 {
-	uint8_t* data= _data;
-	uint32_t	   crc		  = 0;
+	uint8_t* data = _data;
+	uint32_t crc  = 0;
 
 	for (uint32_t i = 0; i < length; i++)
 	{

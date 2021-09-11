@@ -1,5 +1,6 @@
-#include "crc_common.h"
 #include "crc8.h"
+
+#include "crc_common.h"
 
 #ifdef USE_LOOKUP
 
@@ -20,8 +21,8 @@ const uint8_t CRC8_Lookup[] = {
 
 uint8_t CRC8_Calculate(void* _data, size_t size)
 {
-	uint8_t* data= _data;
-	uint8_t crc = 0;
+	uint8_t* data = _data;
+	uint8_t	 crc  = 0;
 	for (size_t i = 0; i < size; i++)
 	{
 		uint8_t index = crc ^ data[i];
@@ -34,8 +35,8 @@ uint8_t CRC8_Calculate(void* _data, size_t size)
 
 uint8_t CRC8_Calculate(void* _data, size_t size)
 {
-	uint8_t* data= _data;
-	uint8_t crc		   = 0;
+	uint8_t* data = _data;
+	uint8_t	 crc  = 0;
 	for (size_t i = 0; i < size; i++)
 	{
 		crc ^= data[i];

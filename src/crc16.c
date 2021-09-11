@@ -1,5 +1,6 @@
-#include "crc_common.h"
 #include "crc16.h"
+
+#include "crc_common.h"
 
 #ifdef USE_LOOKUP
 
@@ -24,8 +25,8 @@ const uint16_t CRC16_Lookup[] = {
 
 uint16_t CRC16_Calculate(void* _data, size_t size)
 {
-	uint8_t* data= _data;
-	uint16_t crc = 0;
+	uint8_t* data = _data;
+	uint16_t crc  = 0;
 	for (size_t i = 0; i < size; i++)
 	{
 		uint8_t index = (uint8_t)(crc >> CRC16_2_MSB) ^ data[i];
@@ -38,8 +39,8 @@ uint16_t CRC16_Calculate(void* _data, size_t size)
 
 uint16_t CRC16_Calculate(void* _data, size_t size)
 {
-	uint8_t* data= _data;
-	uint16_t	   crc		  = 0;
+	uint8_t* data = _data;
+	uint16_t crc  = 0;
 	for (size_t i = 0; i < size; i++)
 	{
 		crc ^= data[i] << CRC16_2_MSB;
