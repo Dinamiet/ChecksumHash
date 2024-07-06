@@ -7,7 +7,9 @@ uint32_t FNV(void* _data, size_t size)
 {
 	uint8_t* data = _data;
 	uint32_t fnv  = FNV_STARTING;
-	for (size_t i = 0; i < size; i++)
+	uint8_t* stopAddress = data + size;
+
+	while (data < stopAddress)
 	{
 		fnv ^= *data++;
 		fnv *= FNV_PRIME;
@@ -20,8 +22,9 @@ uint32_t SDBM(void* _data, size_t size)
 {
 	uint8_t* data = _data;
 	uint32_t sdbm = 0;
+	uint8_t* stopAddress = data + size;
 
-	for (size_t i = 0; i < size; i++) sdbm = (*data++) + (sdbm << 6) + (sdbm << 16) - sdbm;
+	while (data < stopAddress) { sdbm = (*data++) + (sdbm << 6) + (sdbm << 16) - sdbm; }
 
 	return sdbm;
 }
