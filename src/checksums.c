@@ -77,6 +77,7 @@ uint8_t CRC8(const void* _data, const size_t size, const uint8_t starting)
 {
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
+
 	uint8_t        crc         = starting;
 	while (data < stopAddress)
 	{
@@ -91,6 +92,7 @@ uint16_t CRC16(const void* _data, const size_t size, const uint16_t starting)
 {
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
+
 	uint16_t       crc         = starting;
 	while (data < stopAddress)
 	{
@@ -106,6 +108,7 @@ uint32_t CRC32(const void* _data, const size_t size, const uint32_t starting)
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint32_t       crc         = starting;
+
 	while (data < stopAddress)
 	{
 		uint8_t index = (uint8_t)((crc ^ (*data++ << MSB32)) >> MSB32);
@@ -120,6 +123,7 @@ uint8_t CRC8_Poly(const void* _data, const size_t size, const uint8_t starting, 
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint8_t        crc         = starting;
+
 	while (data < stopAddress)
 	{
 		crc ^= *data++;
@@ -140,6 +144,7 @@ uint16_t CRC16_Poly(const void* _data, const size_t size, const uint16_t startin
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint16_t       crc         = starting;
+
 	while (data < stopAddress)
 	{
 		crc ^= *data++ << MSB16;
@@ -160,6 +165,7 @@ uint32_t CRC32_Poly(const void* _data, const size_t size, const uint32_t startin
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint32_t       crc         = starting;
+
 	while (data < stopAddress)
 	{
 		crc ^= *data++ << MSB32;
