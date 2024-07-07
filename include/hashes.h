@@ -16,7 +16,7 @@
  * \param size The size (in bytes) of the data to hash
  * \return Hash of data
  */
-uint32_t FNV(void* data, size_t size);
+uint32_t FNV(const void* data, const size_t size);
 
 /**
  * Calculates the SDBM Hash for the data
@@ -24,6 +24,6 @@ uint32_t FNV(void* data, size_t size);
  * \param size The size (in bytes) of the data to hash
  * \return Hash of data
  */
-uint32_t SDBM(void* data, size_t size);
+uint32_t SDBM(const void* data, const size_t size);
 
 #endif

@@ -21,7 +21,7 @@
  * \param starting A starting checksum value, useful for calculating overall checksums block by block
  * \return Checksum of data
  */
-uint8_t CRC8(void* data, size_t size, uint8_t starting);
+uint8_t CRC8(const void* data, const size_t size, const uint8_t starting);
 
 /**
  * Calculates the CRC16 of the data. Uses a fixed polynomial lookup table for faster calculations
@@ -30,7 +30,7 @@ uint8_t CRC8(void* data, size_t size, uint8_t starting);
  * \param starting A starting checksum value, useful for calculating overall checksums block by block
  * \return Checksum of data
  */
-uint16_t CRC16(void* data, size_t size, uint16_t starting);
+uint16_t CRC16(const void* data, const size_t size, const uint16_t starting);
 
 /**
  * Calculates the CRC32 of the data. Uses a fixed polynomial lookup table for faster calculations
@@ -39,7 +39,7 @@ uint16_t CRC16(void* data, size_t size, uint16_t starting);
  * \param starting A starting checksum value, useful for calculating overall checksums block by block
  * \return Checksum of data
  */
-uint32_t CRC32(void* data, size_t size, uint32_t starting);
+uint32_t CRC32(const void* data, const size_t size, const uint32_t starting);
 
 /**
  * Calculates the CRC8 of the data. Uses a user specified polynomial.
@@ -49,7 +49,7 @@ uint32_t CRC32(void* data, size_t size, uint32_t starting);
  * \param poly Used defined polynomail for CRC calculation.
  * \return Checksum of data
  */
-uint8_t CRC8_Poly(void* data, size_t size, uint8_t starting, uint8_t poly);
+uint8_t CRC8_Poly(const void* data, const size_t size, const uint8_t starting, const uint8_t poly);
 
 /**
  * Calculates the CRC16 of the data. Uses a user specified polynomial.
@@ -59,7 +59,7 @@ uint8_t CRC8_Poly(void* data, size_t size, uint8_t starting, uint8_t poly);
  * \param poly Used defined polynomail for CRC calculation.
  * \return Checksum of data
  */
-uint16_t CRC16_Poly(void* data, size_t size, uint16_t starting, uint16_t poly);
+uint16_t CRC16_Poly(const void* data, const size_t size, const uint16_t starting, const uint16_t poly);
 
 /**
  * Calculates the CRC32 of the data. Uses a user specified polynomial.
@@ -69,6 +69,6 @@ uint16_t CRC16_Poly(void* data, size_t size, uint16_t starting, uint16_t poly);
  * \param poly Used defined polynomail for CRC calculation.
  * \return Checksum of data
  */
-uint32_t CRC32_Poly(void* data, size_t size, uint32_t starting, uint32_t poly);
+uint32_t CRC32_Poly(const void* data, const size_t size, const uint32_t starting, const uint32_t poly);
 
 #endif
