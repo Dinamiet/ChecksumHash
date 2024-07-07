@@ -73,11 +73,11 @@ static const uint32_t Lookup32[] = {
 		0xB8757BDA, 0xB5365D03, 0xB1F740B4,
 };
 
-uint8_t CRC8(void* _data, size_t size, uint8_t starting)
+uint8_t CRC8(const void* _data, const size_t size, const uint8_t starting)
 {
-	uint8_t* data = _data;
-	uint8_t  crc         = starting;
-	uint8_t* stopAddress = data + size;
+	const uint8_t* data        = _data;
+	const uint8_t* stopAddress = data + size;
+	uint8_t        crc         = starting;
 	while (data < stopAddress)
 	{
 		uint8_t index = crc ^ *data++;
@@ -87,11 +87,11 @@ uint8_t CRC8(void* _data, size_t size, uint8_t starting)
 	return crc;
 }
 
-uint16_t CRC16(void* _data, size_t size, uint16_t starting)
+uint16_t CRC16(const void* _data, const size_t size, const uint16_t starting)
 {
-	uint8_t* data = _data;
-	uint16_t crc         = starting;
-	uint8_t* stopAddress = data + size;
+	const uint8_t* data        = _data;
+	const uint8_t* stopAddress = data + size;
+	uint16_t       crc         = starting;
 	while (data < stopAddress)
 	{
 		uint8_t index = (uint8_t)(crc >> MSB16) ^ *data++;
@@ -101,11 +101,11 @@ uint16_t CRC16(void* _data, size_t size, uint16_t starting)
 	return crc;
 }
 
-uint32_t CRC32(void* _data, size_t size, uint32_t starting)
+uint32_t CRC32(const void* _data, const size_t size, const uint32_t starting)
 {
-	uint8_t* data = _data;
-	uint32_t crc         = starting;
-	uint8_t* stopAddress = data + size;
+	const uint8_t* data        = _data;
+	const uint8_t* stopAddress = data + size;
+	uint32_t       crc         = starting;
 	while (data < stopAddress)
 	{
 		uint8_t index = (uint8_t)((crc ^ (*data++ << MSB32)) >> MSB32);
@@ -115,11 +115,11 @@ uint32_t CRC32(void* _data, size_t size, uint32_t starting)
 	return crc;
 }
 
-uint8_t CRC8_Poly(void* _data, size_t size, uint8_t starting, uint8_t poly)
+uint8_t CRC8_Poly(const void* _data, const size_t size, const uint8_t starting, const uint8_t poly)
 {
-	uint8_t* data        = _data;
-	uint8_t  crc         = starting;
-	uint8_t* stopAddress = data + size;
+	const uint8_t* data        = _data;
+	const uint8_t* stopAddress = data + size;
+	uint8_t        crc         = starting;
 	while (data < stopAddress)
 	{
 		crc ^= *data++;
@@ -135,11 +135,11 @@ uint8_t CRC8_Poly(void* _data, size_t size, uint8_t starting, uint8_t poly)
 	return crc;
 }
 
-uint16_t CRC16_Poly(void* _data, size_t size, uint16_t starting, uint16_t poly)
+uint16_t CRC16_Poly(const void* _data, const size_t size, const uint16_t starting, const uint16_t poly)
 {
-	uint8_t* data        = _data;
-	uint16_t crc         = starting;
-	uint8_t* stopAddress = data + size;
+	const uint8_t* data        = _data;
+	const uint8_t* stopAddress = data + size;
+	uint16_t       crc         = starting;
 	while (data < stopAddress)
 	{
 		crc ^= *data++ << MSB16;
@@ -155,11 +155,11 @@ uint16_t CRC16_Poly(void* _data, size_t size, uint16_t starting, uint16_t poly)
 	return crc;
 }
 
-uint32_t CRC32_Poly(void* _data, size_t size, uint32_t starting, uint32_t poly)
+uint32_t CRC32_Poly(const void* _data, const size_t size, const uint32_t starting, const uint32_t poly)
 {
-	uint8_t* data        = _data;
-	uint32_t crc         = starting;
-	uint8_t* stopAddress = data + size;
+	const uint8_t* data        = _data;
+	const uint8_t* stopAddress = data + size;
+	uint32_t       crc         = starting;
 	while (data < stopAddress)
 	{
 		crc ^= *data++ << MSB32;
