@@ -1,5 +1,7 @@
 #include "checksums.h"
 
+#include <assert.h>
+
 #define BITS_PER_BYTE 8
 
 #define CARRY8  ((uint8_t)1 << 7)
@@ -75,6 +77,8 @@ static const uint32_t Lookup32[] = {
 
 uint8_t CRC8(const void* _data, const size_t size, const uint8_t starting)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 
@@ -90,6 +94,8 @@ uint8_t CRC8(const void* _data, const size_t size, const uint8_t starting)
 
 uint16_t CRC16(const void* _data, const size_t size, const uint16_t starting)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 
@@ -105,6 +111,8 @@ uint16_t CRC16(const void* _data, const size_t size, const uint16_t starting)
 
 uint32_t CRC32(const void* _data, const size_t size, const uint32_t starting)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint32_t       crc         = starting;
@@ -120,6 +128,8 @@ uint32_t CRC32(const void* _data, const size_t size, const uint32_t starting)
 
 uint8_t CRC8_Poly(const void* _data, const size_t size, const uint8_t starting, const uint8_t poly)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint8_t        crc         = starting;
@@ -141,6 +151,8 @@ uint8_t CRC8_Poly(const void* _data, const size_t size, const uint8_t starting, 
 
 uint16_t CRC16_Poly(const void* _data, const size_t size, const uint16_t starting, const uint16_t poly)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint16_t       crc         = starting;
@@ -162,6 +174,8 @@ uint16_t CRC16_Poly(const void* _data, const size_t size, const uint16_t startin
 
 uint32_t CRC32_Poly(const void* _data, const size_t size, const uint32_t starting, const uint32_t poly)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint32_t       crc         = starting;
