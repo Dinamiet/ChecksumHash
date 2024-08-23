@@ -1,5 +1,7 @@
 #include "checksums.h"
 
+#include <assert.h>
+
 #define BITS_PER_BYTE 8
 
 #define CARRY8  ((uint8_t)1 << 7)
@@ -10,7 +12,7 @@
 #define MSB32 24
 
 /* Lookup table for faster CRC8 calculations */
-static const uint8_t Lookup8[] = {
+static const uint8_t lookup8[] = {
 		0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D, 0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B,
 		0x62, 0x65, 0x48, 0x4F, 0x46, 0x41, 0x54, 0x53, 0x5A, 0x5D, 0xE0, 0xE7, 0xEE, 0xE9, 0xFC, 0xFB, 0xF2, 0xF5, 0xD8, 0xDF, 0xD6, 0xD1,
 		0xC4, 0xC3, 0xCA, 0xCD, 0x90, 0x97, 0x9E, 0x99, 0x8C, 0x8B, 0x82, 0x85, 0xA8, 0xAF, 0xA6, 0xA1, 0xB4, 0xB3, 0xBA, 0xBD, 0xC7, 0xC0,
@@ -26,7 +28,7 @@ static const uint8_t Lookup8[] = {
 };
 
 /* Lookup table for faster CRC16 calculations */
-static const uint16_t Lookup16[] = {
+static const uint16_t lookup16[] = {
 		0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7, 0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
 		0x1231, 0x0210, 0x3273, 0x2252, 0x52B5, 0x4294, 0x72F7, 0x62D6, 0x9339, 0x8318, 0xB37B, 0xA35A, 0xD3BD, 0xC39C, 0xF3FF, 0xE3DE,
 		0x2462, 0x3443, 0x0420, 0x1401, 0x64E6, 0x74C7, 0x44A4, 0x5485, 0xA56A, 0xB54B, 0x8528, 0x9509, 0xE5EE, 0xF5CF, 0xC5AC, 0xD58D,
@@ -46,7 +48,7 @@ static const uint16_t Lookup16[] = {
 };
 
 /* Lookup table for faster CRC32 calculations */
-static const uint32_t Lookup32[] = {
+static const uint32_t lookup32[] = {
 		0x00000000, 0x04C11DB7, 0x09823B6E, 0x0D4326D9, 0x130476DC, 0x17C56B6B, 0x1A864DB2, 0x1E475005, 0x2608EDB8, 0x22C9F00F, 0x2F8AD6D6,
 		0x2B4BCB61, 0x350C9B64, 0x31CD86D3, 0x3C8EA00A, 0x384FBDBD, 0x4C11DB70, 0x48D0C6C7, 0x4593E01E, 0x4152FDA9, 0x5F15ADAC, 0x5BD4B01B,
 		0x569796C2, 0x52568B75, 0x6A1936C8, 0x6ED82B7F, 0x639B0DA6, 0x675A1011, 0x791D4014, 0x7DDC5DA3, 0x709F7B7A, 0x745E66CD, 0x9823B6E0,
@@ -75,6 +77,8 @@ static const uint32_t Lookup32[] = {
 
 uint8_t CRC8(const void* _data, const size_t size, const uint8_t starting)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 
@@ -82,7 +86,7 @@ uint8_t CRC8(const void* _data, const size_t size, const uint8_t starting)
 	while (data < stopAddress)
 	{
 		uint8_t index = crc ^ *data++;
-		crc           = Lookup8[index];
+		crc           = lookup8[index];
 	}
 
 	return crc;
@@ -90,6 +94,8 @@ uint8_t CRC8(const void* _data, const size_t size, const uint8_t starting)
 
 uint16_t CRC16(const void* _data, const size_t size, const uint16_t starting)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 
@@ -97,7 +103,7 @@ uint16_t CRC16(const void* _data, const size_t size, const uint16_t starting)
 	while (data < stopAddress)
 	{
 		uint8_t index = (uint8_t)(crc >> MSB16) ^ *data++;
-		crc           = (crc << BITS_PER_BYTE) ^ Lookup16[index];
+		crc           = (crc << BITS_PER_BYTE) ^ lookup16[index];
 	}
 
 	return crc;
@@ -105,6 +111,8 @@ uint16_t CRC16(const void* _data, const size_t size, const uint16_t starting)
 
 uint32_t CRC32(const void* _data, const size_t size, const uint32_t starting)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint32_t       crc         = starting;
@@ -112,7 +120,7 @@ uint32_t CRC32(const void* _data, const size_t size, const uint32_t starting)
 	while (data < stopAddress)
 	{
 		uint8_t index = (uint8_t)((crc ^ (*data++ << MSB32)) >> MSB32);
-		crc           = (crc << BITS_PER_BYTE) ^ Lookup32[index];
+		crc           = (crc << BITS_PER_BYTE) ^ lookup32[index];
 	}
 
 	return crc;
@@ -120,6 +128,8 @@ uint32_t CRC32(const void* _data, const size_t size, const uint32_t starting)
 
 uint8_t CRC8_Poly(const void* _data, const size_t size, const uint8_t starting, const uint8_t poly)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint8_t        crc         = starting;
@@ -141,6 +151,8 @@ uint8_t CRC8_Poly(const void* _data, const size_t size, const uint8_t starting, 
 
 uint16_t CRC16_Poly(const void* _data, const size_t size, const uint16_t starting, const uint16_t poly)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint16_t       crc         = starting;
@@ -162,6 +174,8 @@ uint16_t CRC16_Poly(const void* _data, const size_t size, const uint16_t startin
 
 uint32_t CRC32_Poly(const void* _data, const size_t size, const uint32_t starting, const uint32_t poly)
 {
+	assert(_data != NULL);
+
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 	uint32_t       crc         = starting;
