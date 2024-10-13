@@ -66,12 +66,13 @@ target_include_directories(
 		include
 )
 
+file(GLOB_RECURSE INCLUDE_FILES CONFIGURE_DEPENDS "include/*.h")
+file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS "src/*.c")
+
 target_sources(
 	${PROJECT_NAME}
 	PUBLIC
-		include/checksums.h
-		include/hashes.h
+		${INCLUDE_FILES}
 	PRIVATE
-		src/checksums.c
-		src/hashes.c
+		${SOURCE_FILES}
 )
