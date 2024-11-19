@@ -82,7 +82,7 @@ uint8_t CRC8(const void* _data, const size_t size, const uint8_t starting)
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 
-	uint8_t        crc         = starting;
+	uint8_t crc = starting;
 	while (data < stopAddress)
 	{
 		uint8_t index = crc ^ *data++;
@@ -99,7 +99,7 @@ uint16_t CRC16(const void* _data, const size_t size, const uint16_t starting)
 	const uint8_t* data        = _data;
 	const uint8_t* stopAddress = data + size;
 
-	uint16_t       crc         = starting;
+	uint16_t crc = starting;
 	while (data < stopAddress)
 	{
 		uint8_t index = (uint8_t)(crc >> MSB16) ^ *data++;
@@ -119,7 +119,7 @@ uint32_t CRC32(const void* _data, const size_t size, const uint32_t starting)
 
 	while (data < stopAddress)
 	{
-		uint8_t index = (uint8_t)((crc ^ (*data++ << MSB32)) >> MSB32);
+		uint8_t index = (uint8_t)((crc ^ ((uint32_t)(*data++) << MSB32)) >> MSB32);
 		crc           = (crc << BITS_PER_BYTE) ^ lookup32[index];
 	}
 
@@ -182,7 +182,7 @@ uint32_t CRC32_Poly(const void* _data, const size_t size, const uint32_t startin
 
 	while (data < stopAddress)
 	{
-		crc ^= *data++ << MSB32;
+		crc ^= (uint32_t)(*data++) << MSB32;
 		for (size_t j = 0; j < BITS_PER_BYTE; j++)
 		{
 			if (crc & CARRY32)
