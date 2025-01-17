@@ -1,26 +1,19 @@
 # Checksum and Hash functions
+Commonly used checksums and hash functions
 
-## CRC
-Online generator which was used to verify algorithms:
->	https://crccalc.com/
+## Implementations
 
-Nice resources:
->	http://www.sunshine2k.de/articles/coding/crc/understanding_crc.html#:~:text=2.-,Introduction,a%20very%20detailed%20CRC%20introduction.
+### Checksums
+-	CRC 8
+-	CRC 16
+-	CRC 32
 
-## Hash function
-SDBM:
-Provides `good` distibution
->	https://www.cse.yorku.ca/~oz/hash.html
+### Hash functions
+-	SDBM
+-	FNV
 
+# Building
+This project utilizes `CMake` for building and integration with other projects. Custom build configurations are recommended to simplify the process of including this library in your own projects.
 
-FNV:
-Provides `outstanding` distibution (`excellent` for FNV-1)
->	https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
-
-FNV-1a provides better distibution than FNV-1
-
-# TODO:
--	MD5 Hash
--	SHA256 Hash
-
->	https://medium.com/a-42-journey/implementing-the-sha256-and-md5-hash-functions-in-c-78c17e657794
+# Documentation
+Documentation for this project is generated using Doxygen (`CMake` target `docs`) to provide a clear and concise reference for users.
