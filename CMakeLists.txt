@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20.0)
+cmake_minimum_required(VERSION 4.1)
 
 project(
 	ChecksumHash
@@ -66,8 +66,19 @@ target_include_directories(
 		include
 )
 
-file(GLOB_RECURSE INCLUDE_FILES CONFIGURE_DEPENDS "include/*.h")
-file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS "src/*.c")
+file(
+	GLOB_RECURSE
+		INCLUDE_FILES
+	CONFIGURE_DEPENDS
+		"include/*.h"
+)
+
+file(
+	GLOB_RECURSE
+ 		SOURCE_FILES
+	CONFIGURE_DEPENDS
+		"src/*.c"
+)
 
 target_sources(
 	${PROJECT_NAME}
